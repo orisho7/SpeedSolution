@@ -208,6 +208,40 @@ namespace SpeedSolution.Controllers
             }
         }
 
+        [HttpPost]
+        public async Task<IActionResult> DeleteBooking(Guid id)
+        {
+            var userIdString = HttpContext.Session.GetString("UserId");
+            if (string.IsNullOrEmpty(userIdString))
+            {
+                return RedirectToAction("Login");
+            }
+
+            try
+            {
+                var userId = Guid.Parse(userIdString);
+                
+                // Get the booking to verify it belongs to the user
+                var booking = await _bookings.GetByIdAsync(id);
+                if (booking == null || booking.User_Id != userId)
+                {
+                    TempData["ErrorMessage"] = "Booking not found or you don't have permission to delete it.";
+                    return RedirectToAction("Profile");
+                }
+
+                // Delete the booking
+                await _bookings.DeleteAsync(id);
+                
+                TempData["SuccessMessage"] = "Booking deleted successfully!";
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = $"Error deleting booking: {ex.Message}";
+            }
+
+            return RedirectToAction("Profile");
+        }
+
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
