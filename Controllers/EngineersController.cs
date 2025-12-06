@@ -90,7 +90,7 @@ namespace SpeedSolution.Controllers
                 Time = Time,
                 EngineerName = EngineerName,
                 Payment_Method = PaymentMethod,
-                Payment_Status = "Pending"
+                Payment_Status = "Accepted"
             };
 
             // Save to database
