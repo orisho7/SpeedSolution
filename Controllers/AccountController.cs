@@ -11,10 +11,12 @@ namespace SpeedSolution.Controllers
     public class AccountController : Controller
     {
         private readonly UserService _users;
+        private readonly BookingService _bookings;
 
-        public AccountController(UserService users)
+        public AccountController(UserService users, BookingService bookings)
         {
             _users = users;
+            _bookings = bookings;
         }
 
         // GET: /Account/Login
@@ -148,6 +150,12 @@ namespace SpeedSolution.Controllers
             {
                 return RedirectToAction("Login");
             }
+
+            // Fetch user's bookings
+            var allBookings = await _bookings.GetAllAsync();
+            var userBookings = allBookings?.Where(b => b.User_Id == userId).OrderByDescending(b => b.Created_At).ToList();
+            
+            ViewBag.Bookings = userBookings ?? new List<Booking>();
 
             return View(user);
         }

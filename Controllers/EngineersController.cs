@@ -7,7 +7,13 @@ namespace SpeedSolution.Controllers
     public class EngineersController : Controller
     {
         private readonly EngineerService _engineers;
-        public EngineersController(EngineerService engineers) => _engineers = engineers;
+        private readonly BookingService _bookings;
+        
+        public EngineersController(EngineerService engineers, BookingService bookings)
+        {
+            _engineers = engineers;
+            _bookings = bookings;
+        }
 
         public async Task<IActionResult> Index(string category, int? page)
         {
@@ -78,23 +84,36 @@ namespace SpeedSolution.Controllers
             // Create booking
             var booking = new Models.Booking
             {
-                Id = Guid.NewGuid(),
                 User_Id = userId,
                 Engineer_Id = EngineerId,
                 Date = Date,
                 Time = Time,
                 EngineerName = EngineerName,
                 Payment_Method = PaymentMethod,
-                Payment_Status = "Pending",
-                Created_At = DateTime.UtcNow
+                Payment_Status = "Pending"
             };
 
-            // Save to database (you'll need to inject BookingService)
-            // For now, we'll redirect with a success message
+            // Save to database
+            try
+            {
+                var success = await _bookings.CreateAsync(booking);
+                
+                if (success)
+                {
+                    TempData["SuccessMessage"] = $"Booking confirmed with {EngineerName} on {Date:yyyy-MM-dd} at {Time}!";
+                    return RedirectToAction("Profile", "Account");
+                }
+                else
+                {
+                    ViewBag.Error = "Failed to create booking. Please try again.";
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = $"Error creating booking: {ex.Message}";
+            }
 
             var engineer = await _engineers.GetByIdAsync(EngineerId);
-            ViewBag.ConfirmationMessage = $"Booking confirmed with {EngineerName} on {Date:yyyy-MM-dd} at {Time}!";
-
             return View(engineer);
         }
     }

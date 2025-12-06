@@ -73,35 +73,30 @@
         <div class="col-md-6">
             <h3 style="color: white; margin-bottom: 20px;">Your Bookings</h3>
             
-            @* TEMPORARILY DISABLED - Bookings property removed from User model
-            @if (Model.Bookings != null && Model.Bookings.Any())
+            @{
+                var bookings = ViewBag.Bookings as List<SpeedSolution.Models.Booking>;
+            }
+            
+            @if (bookings != null && bookings.Any())
             {
-                @foreach (var booking in Model.Bookings)
+                foreach (var booking in bookings)
                 {
                     <div class="card" style="padding: 20px; background: white; color: black; margin-bottom: 20px; border-left: 5px solid navy;">
                         <h4 style="color: navy;">Booking with @booking.EngineerName</h4>
                         <p><strong>Date:</strong> @booking.Date.ToString("d")</p>
-                        <p><strong>Time:</strong> @booking.Time.ToString()</p>
+                        <p><strong>Time:</strong> @booking.Time</p>
+                        <p><strong>Payment Method:</strong> @booking.Payment_Method</p>
+                        <p><strong>Status:</strong> <span style="color: @(booking.Payment_Status == "Confirmed" ? "#28a745" : "#ffc107");">@booking.Payment_Status</span></p>
                         <p style="margin-top: 10px; font-weight: bold; color: #00e676;">We can't wait to see you!</p>
-                        
-                        <div style="margin-top: 15px; display: flex; gap: 10px;">
-                            <a href="/Account/EditBooking/@booking.Id" class="btn btn-sm" style="background: #28a745; color: white; border: none;">Edit Booking</a>
-                            
-                            <form asp-action="DeleteBooking" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this booking?');">
-                                <input type="hidden" name="id" value="@booking.Id" />
-                                <button type="submit" class="btn btn-sm" style="background: #dc3545; color: white; border: none;">Delete Booking</button>
-                            </form>
-                        </div>
                     </div>
                 }
             }
             else
             {
-            *@
                 <div class="card" style="padding: 20px; background: white; color: black;">
-                    <p>Bookings feature temporarily disabled.</p>
+                    <p>No bookings yet. <a href="/Engineers" style="color: navy; text-decoration: underline;">Browse engineers</a> to make your first booking!</p>
                 </div>
-            @* } *@
+            }
         </div>
     </div>
 </div>

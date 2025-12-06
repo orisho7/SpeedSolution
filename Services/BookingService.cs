@@ -15,8 +15,7 @@ namespace SpeedSolution.Services
 
         public async Task<List<Booking>> GetAllAsync()
         {
-            var res = await _supabase.Client.From<Booking>().Select("*, engineer:engineers(name)").Get();
-            // Note: simple Get() is fine, join syntax might differ. Keeping it simple first.
+            var res = await _supabase.Client.From<Booking>().Get();
             return res.Models;
         }
 
