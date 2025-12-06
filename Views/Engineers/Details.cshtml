@@ -38,9 +38,14 @@
                 </div>
 
                 <div class="mt-2" style="margin-top: 30px; display: flex; gap: 20px;">
-                    @if (User.Identity.IsAuthenticated)
+                    @{
+                        var bookingUserId = Context.Session.GetString("UserId");
+                        var isUserLoggedIn = !string.IsNullOrEmpty(bookingUserId);
+                    }
+                    
+                    @if (isUserLoggedIn)
                     {
-                        <a href="/Engineers/Book/@Model.Id" class="btn" style="background: navy; color: white; padding: 15px 0; font-size: 1.2em; width: 200px; text-align: center;">Book Now</a>
+                        <a href="/Engineers/Book/@Model.Id" class="btn" style="background: navy; color: white; padding: 15px 0; font-size: 1.2em; width: 200px; text-align: center; text-decoration: none;">Book Now</a>
                     }
                     else
                     {
@@ -48,7 +53,7 @@
                             Please <a href="/Account/Login" style="color: navy; text-decoration: underline;">Login</a> to book this engineer.
                         </div>
                     }
-                    <a href="/Engineers" class="btn" style="background-color: #ccc; color: #333; padding: 15px 0; font-size: 1.2em; width: 200px; text-align: center;">Back to List</a>
+                    <a href="/Engineers" class="btn" style="background-color: #ccc; color: #333; padding: 15px 0; font-size: 1.2em; width: 200px; text-align: center; text-decoration: none;">Back to List</a>
                 </div>
             </div>
         </div>

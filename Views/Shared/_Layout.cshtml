@@ -56,29 +56,23 @@
         <!-- Top Bar for Profile/Login -->
         <div class="container" style="position: relative; z-index: 3; padding-top: 20px; text-align: right;">
             <div class="profile-section">
-                @if (User.Identity.IsAuthenticated)
+                @{
+                    var userId = Context.Session.GetString("UserId");
+                    var userName = Context.Session.GetString("UserName");
+                    var isLoggedIn = !string.IsNullOrEmpty(userId);
+                }
+                
+                @if (isLoggedIn)
                 {
-                    var gender = User.FindFirst("Gender")?.Value;
-                    var firstName = User.FindFirst("FirstName")?.Value;
-                    
-                    if (gender == "Male")
-                    {
-                        <!-- User Avatar: Male Avatar -->
-                        <img src="/images/male-default.jpg" alt="Male Profile" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid white;" />
-                    }
-                    else
-                    {
-                        <!-- User Avatar: Female Avatar -->
-                        <img src="/images/female-default.jpg" alt="Female Profile" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid white;" />
-                    }
-                    <a href="/Account/Profile" style="color: white; font-weight: bold; margin-left: 5px; text-decoration: none; text-shadow: 1px 1px 2px black;">@firstName</a>
-                    <form asp-controller="Account" asp-action="Logout" method="post" style="display: inline;">
-                        <button type="submit" class="btn" style="padding: 5px 10px; font-size: 0.8em; margin-left: 10px; background: rgba(255,255,255,0.9); color: navy; border: none;">Logout</button>
-                    </form>
+                    <a href="/Account/Profile" style="color: white; font-weight: bold; text-decoration: none; text-shadow: 1px 1px 2px black; margin-right: 15px;">
+                        👤 @userName
+                    </a>
+                    <a href="/Account/Logout" class="btn" style="padding: 5px 15px; font-size: 0.9em; background: rgba(255,255,255,0.9); color: navy; border: none; text-decoration: none;">Logout</a>
                 }
                 else
                 {
-                    <a href="/Account/Login" class="btn" style="background: white; color: navy; font-weight: bold;">Login</a>
+                    <a href="/Account/Login" class="btn" style="background: white; color: navy; font-weight: bold; padding: 8px 20px; text-decoration: none; margin-right: 10px;">Login</a>
+                    <a href="/Account/Register" class="btn" style="background: rgba(255,255,255,0.2); color: white; font-weight: bold; padding: 8px 20px; text-decoration: none; border: 2px solid white;">Register</a>
                 }
             </div>
         </div>
@@ -99,13 +93,16 @@
     </header>
     
     <div class="container" style="margin-top: 20px; min-height: 60vh;">
-        @if (User.Identity.IsAuthenticated)
+        @{
+            var welcomeUserId = Context.Session.GetString("UserId");
+            var welcomeUserName = Context.Session.GetString("UserName");
+        }
+        
+        @if (!string.IsNullOrEmpty(welcomeUserId))
         {
-             var firstName = User.FindFirst("FirstName")?.Value;
-             var secondName = User.FindFirst("SecondName")?.Value;
              <!-- Welcome Message with Timer -->
              <div id="welcomeMessage" class="alert alert-info text-center" style="background-color: white; color: navy; padding: 10px; margin-bottom: 20px; border-radius: 5px; width: 50%; margin: 0 auto 20px auto;">
-                 Welcome, @firstName @secondName! We are happy to see you.
+                 Welcome, @welcomeUserName! We are happy to see you.
              </div>
              <script>
                  setTimeout(function() {

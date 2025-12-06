@@ -41,7 +41,8 @@ namespace SpeedSolution.Models
         [Column("created_at")]
         public DateTime Created_At { get; set; }
 
-        [Reference(typeof(Booking))]
-        public List<Booking> Bookings { get; set; }
+        // TEMPORARILY COMMENTED OUT - This was causing queries to return 0 results
+        // [Reference(typeof(Booking))]
+        // public List<Booking> Bookings { get; set; }
     }
 }
