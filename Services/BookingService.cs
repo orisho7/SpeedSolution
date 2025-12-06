@@ -30,5 +30,11 @@ namespace SpeedSolution.Services
             var res = await _supabase.Client.From<Booking>().Insert(booking);
             return res.Models.Count > 0;
         }
+
+        public async Task<bool> DeleteAsync(Guid id)
+        {
+            await _supabase.Client.From<Booking>().Where(b => b.Id == id).Delete();
+            return true;
+        }
     }
 }
