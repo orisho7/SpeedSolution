@@ -1,0 +1,172 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SpeedSolution</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Override font for title */
+        .site-header {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0 0 15px 15px; /* Smooth corners */
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .header-bg {
+            position: absolute;
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%;
+            background: #010130; /* Solid Navy */
+            z-index: 0;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2; /* Ensure text is above background */
+            padding: 80px 20px; /* Wide and Large */
+            text-align: center;
+            background: rgba(0,0,0,0.4); /* Dark overlay for readability */
+        }
+
+        .site-title { 
+            font-family: 'Playfair Display', serif;
+            font-size: 4em; /* Large Professional Font */
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            margin: 0;
+        }
+        
+        .profile-section {
+            display: inline-block; /* Just ensure it behaves as a block/inline-block */
+        }
+
+        body { font-family: 'Roboto', sans-serif; }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-bg"></div>
+        
+        <!-- Top Bar for Profile/Login -->
+        <div class="container" style="position: relative; z-index: 3; padding-top: 20px; text-align: right;">
+            <div class="profile-section">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    var gender = User.FindFirst("Gender")?.Value;
+                    var firstName = User.FindFirst("FirstName")?.Value;
+                    
+                    if (gender == "Male")
+                    {
+                        <!-- User Avatar: Male Avatar -->
+                        <img src="/images/male-default.jpg" alt="Male Profile" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid white;" />
+                    }
+                    else
+                    {
+                        <!-- User Avatar: Female Avatar -->
+                        <img src="/images/female-default.jpg" alt="Female Profile" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid white;" />
+                    }
+                    <a href="/Account/Profile" style="color: white; font-weight: bold; margin-left: 5px; text-decoration: none; text-shadow: 1px 1px 2px black;">@firstName</a>
+                    <form asp-controller="Account" asp-action="Logout" method="post" style="display: inline;">
+                        <button type="submit" class="btn" style="padding: 5px 10px; font-size: 0.8em; margin-left: 10px; background: rgba(255,255,255,0.9); color: navy; border: none;">Logout</button>
+                    </form>
+                }
+                else
+                {
+                    <a href="/Account/Login" class="btn" style="background: white; color: navy; font-weight: bold;">Login</a>
+                }
+            </div>
+        </div>
+        
+        <div class="header-content">
+            <div class="container">
+                <div class="site-title">Speed Solution</div>
+            </div>
+        </div>
+
+        <nav class="navbar" style="position: absolute; bottom: 0; width: 100%; z-index: 3; background: rgba(0,0,0,0.6);">
+            <div class="container" style="display: flex; gap: 20px; justify-content: center; padding: 10px;">
+                <a href="/" style="color: white; text-decoration: none; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">Home</a>
+                <a href="/Engineers" style="color: white; text-decoration: none; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">Engineers</a>
+                <a href="/ContactUs" style="color: white; text-decoration: none; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">Contact Us</a>
+            </div>
+        </nav>
+    </header>
+    
+    <div class="container" style="margin-top: 20px; min-height: 60vh;">
+        @if (User.Identity.IsAuthenticated)
+        {
+             var firstName = User.FindFirst("FirstName")?.Value;
+             var secondName = User.FindFirst("SecondName")?.Value;
+             <!-- Welcome Message with Timer -->
+             <div id="welcomeMessage" class="alert alert-info text-center" style="background-color: white; color: navy; padding: 10px; margin-bottom: 20px; border-radius: 5px; width: 50%; margin: 0 auto 20px auto;">
+                 Welcome, @firstName @secondName! We are happy to see you.
+             </div>
+             <script>
+                 setTimeout(function() {
+                     var msg = document.getElementById('welcomeMessage');
+                     if(msg) msg.style.display = 'none';
+                 }, 5000); // 5 seconds
+             </script>
+        }
+        
+        @RenderBody()
+    </div>
+
+    <footer style="background-color: rgba(255,255,255,0.05); padding: 40px 0; margin-top: 60px; border-top: 1px solid rgba(255,255,255,0.1); margin-bottom: 20px;">
+        <div class="container">
+            <div style="text-align: center; max-width: 600px;">
+                <div style="font-size: 1.1em; margin-bottom: 20px;">&copy; 2025 - SpeedSolution</div>
+                
+                <div style="background-color: rgba(255,255,255,0.9); padding: 15px; border-radius: 8px; display: flex; flex-direction: column; gap: 10px; margin-top: 10px; color: black;">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <span style="width: 20px; text-align: center;">📍</span>
+                        <span style="font-weight: bold;">We are located in Saudi Arabia</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <span style="width: 20px; text-align: center;">🤝</span>
+                        <a href="#" style="color: black; text-decoration: underline; font-weight: bold;">Join us</a>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <span style="width: 20px; text-align: center;">🐦</span>
+                        <a href="#" style="color: black; text-decoration: underline; font-weight: bold;">Follow us on Twitter</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Chat bot -->
+    <div class="chat-bot" onclick="toggleChat()">?</div>
+    
+    <div id="chatBox" style="display: none; position: fixed; bottom: 150px; right: 30px; width: 300px; height: 400px; background: white; border: 1px solid #ccc; box-shadow: 0 4px 8px rgba(0,0,0,0.2); border-radius: 10px; z-index: 1000; flex-direction: column; color: black;">
+        <div style="background: navy; color: white; padding: 10px; border-radius: 10px 10px 0 0; display: flex; justify-content: space-between;">
+            <span>Customer Service</span>
+            <span onclick="toggleChat()" style="cursor: pointer;">x</span>
+        </div>
+        <div style="flex: 1; padding: 10px; overflow-y: auto;">
+            <div style="background: #f1f1f1; padding: 8px; border-radius: 5px; margin-bottom: 10px;">Hello, how can I assist you?</div>
+        </div>
+        <div style="padding: 10px; border-top: 1px solid #eee;">
+            <input type="text" placeholder="Type a message..." style="width: 100%; padding: 5px;" />
+        </div>
+    </div>
+
+    <script>
+        function toggleChat() {
+            var chatBox = document.getElementById('chatBox');
+            if (chatBox.style.display === 'none') {
+                chatBox.style.display = 'flex';
+            } else {
+                chatBox.style.display = 'none';
+            }
+        }
+    </script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>

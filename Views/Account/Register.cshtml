@@ -1,0 +1,91 @@
+@model SpeedSolution.Models.User
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="row justify-content-center" style="display: flex; justify-content: center;">
+    <div class="col-md-6" style="width: 100%; max-width: 600px;">
+        <div class="card" style="color: black;">
+            <h2 class="text-center mb-2">Register</h2>
+            <form asp-action="Register" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger" style="color: red;"></div>
+
+                @if (ViewBag.Error != null)
+                {
+                    <div class="alert alert-danger" style="background-color: #f8d7da; color: #721c24; padding: 12px; border-radius: 5px; margin-bottom: 15px; border: 1px solid #f5c6cb;">
+                        @ViewBag.Error
+                    </div>
+                }
+
+                <div class="form-group">
+                    <label asp-for="Mobile">Mobile Number (Verification code will be sent)</label>
+                    <input asp-for="Mobile" class="form-control" />
+                    <span asp-validation-for="Mobile" class="text-danger" style="color: red;"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Email">Email</label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger" style="color: red;"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="FirstName">First Name (English)</label>
+                    <input asp-for="FirstName" class="form-control" />
+                    <span asp-validation-for="FirstName" class="text-danger" style="color: red;"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="SecondName">Second Name (English)</label>
+                    <input asp-for="SecondName" class="form-control" />
+                    <span asp-validation-for="SecondName" class="text-danger" style="color: red;"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="DateOfBirth">Date of Birth</label>
+                    <input asp-for="DateOfBirth" class="form-control" type="date" />
+                    <span asp-validation-for="DateOfBirth" class="text-danger" style="color: red;"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Gender">Gender</label>
+                    <select asp-for="Gender" class="form-control">
+                        <option value="">Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                    <span asp-validation-for="Gender" class="text-danger" style="color: red;"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="City">City</label>
+                    <input asp-for="City" class="form-control" />
+                    <span asp-validation-for="City" class="text-danger" style="color: red;"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Password">Password (At least 1 uppercase & digits)</label>
+                    <input asp-for="Password" class="form-control" type="password" />
+                    <span asp-validation-for="Password" class="text-danger" style="color: red;"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="ReferralSource">How did you hear about us?</label>
+                    <select asp-for="ReferralSource" class="form-control">
+                        <option value="">Select Option</option>
+                        <option value="Friends">Friends</option>
+                        <option value="Social Media">Social Media</option>
+                        <option value="Educational Institution">Educational Institution</option>
+                        <option value="Community">Community</option>
+                        <option value="Work">Work</option>
+                    </select>
+                </div>
+
+                <div class="form-group text-center">
+                    <button type="submit" class="btn" style="width: 100%; background: navy; color: white;">Register</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

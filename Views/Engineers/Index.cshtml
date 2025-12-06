@@ -1,0 +1,87 @@
+﻿@model List<SpeedSolution.Models.Engineer>
+
+@{
+    ViewData["Title"] = "Engineers";
+    var categories = ViewBag.Categories as List<string>;
+    var currentCategory = ViewBag.Category as string;
+    var currentPage = (int)ViewBag.CurrentPage;
+    var totalPages = (int)ViewBag.TotalPages;
+}
+
+<div class="row" style="display: flex; gap: 30px;">
+    <!-- Sidebar Categories -->
+    <div class="col-md-3" style="flex: 0 0 250px;">
+        <div class="card" style="background: white; color: navy;">
+            <h3 style="border-bottom: 2px solid navy; padding-bottom: 10px;">Categories</h3>
+            <ul style="list-style: none; padding: 0;">
+                <li style="margin-bottom: 10px;">
+                    <a href="/Engineers" style="color: navy; font-weight: @(string.IsNullOrEmpty(currentCategory) ? "bold" : "normal")">All Categories</a>
+                </li>
+                @foreach (var category in categories)
+                {
+                    <li style="margin-bottom: 10px;">
+                        <a href="/Engineers?category=@category" style="color: navy; font-weight: @(currentCategory == category ? "bold" : "normal")">@category</a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+
+    <!-- Engineers Grid -->
+    <div class="col-md-9" style="flex: 1;">
+        <h2 style="color: white; margin-bottom: 20px;">@(string.IsNullOrEmpty(currentCategory) ? "All Engineers" : currentCategory)</h2>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px;">
+            @foreach (var engineer in Model)
+            {
+                <a href="/Engineers/Details/@engineer.Id" style="text-decoration: none; color: inherit;">
+                    <div class="card" style="text-align: center; padding: 30px; transition: transform 0.3s; cursor: pointer;">
+                        <!-- Messenger Style Avatar -->
+                        <div style="position: relative; width: 120px; height: 120px; margin: 0 auto 20px;">
+                            <!-- Placeholder for Engineer Image: Upload and unify image here -->
+                            <img src="/images/Eng.jpg" alt="@engineer.FirstName" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 3px solid navy;" />
+                        </div>
+                        <h4 style="color: navy; margin-bottom: 10px;">@engineer.FirstName @engineer.LastName</h4>
+                        <p style="color: #555;">@engineer.Specialization</p>
+                        <p style="color: navy; font-weight: bold; font-size: 1.2em; margin-top: 10px;">$@engineer.Price/hr</p>
+                    </div>
+                </a>
+            }
+        </div>
+
+        <!-- Pagination (1-5 then arrow to 6-10) -->
+        @if (totalPages > 1)
+        {
+            <div class="text-center mt-2" style="margin-top: 40px;">
+                @{
+                    int startPage = currentPage > 5 ? 6 : 1;
+                    int endPage = Math.Min(startPage + 4, totalPages);
+                }
+
+                @if (startPage > 1)
+                {
+                    <a href="/Engineers?category=@currentCategory&page=@(startPage - 1)" 
+                       style="display: inline-block; padding: 5px 10px; margin: 0 5px; color: gray; font-size: 1.2em; text-decoration: none;">
+                       &larr; <!-- Left Arrow -->
+                    </a>
+                }
+
+                @for (int i = startPage; i <= endPage; i++)
+                {
+                    <a href="/Engineers?category=@currentCategory&page=@i" 
+                       style="display: inline-block; padding: 5px 10px; margin: 0 5px; color: @(currentPage == i ? "navy" : "gray"); font-weight: @(currentPage == i ? "bold" : "normal"); font-size: 1.2em; text-decoration: none;">
+                        @i
+                    </a>
+                }
+
+                @if (endPage < totalPages)
+                {
+                    <a href="/Engineers?category=@currentCategory&page=@(endPage + 1)" 
+                       style="display: inline-block; padding: 5px 10px; margin: 0 5px; color: gray; font-size: 1.2em; text-decoration: none;">
+                       &rarr; <!-- Right Arrow -->
+                    </a>
+                }
+            </div>
+        }
+    </div>
+</div>

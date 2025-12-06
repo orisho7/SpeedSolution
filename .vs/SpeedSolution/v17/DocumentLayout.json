@@ -1,0 +1,69 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Project\\SpeedSolution\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{E81F9304-FD00-4D47-A59B-18C2A12EA59B}|SpeedSolution.csproj|c:\\project\\speedsolution\\views\\engineers\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E81F9304-FD00-4D47-A59B-18C2A12EA59B}|SpeedSolution.csproj|solutionrelative:views\\engineers\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E81F9304-FD00-4D47-A59B-18C2A12EA59B}|SpeedSolution.csproj|c:\\project\\speedsolution\\controller.cs\\engineerscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E81F9304-FD00-4D47-A59B-18C2A12EA59B}|SpeedSolution.csproj|solutionrelative:controller.cs\\engineerscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E81F9304-FD00-4D47-A59B-18C2A12EA59B}|SpeedSolution.csproj|c:\\project\\speedsolution\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E81F9304-FD00-4D47-A59B-18C2A12EA59B}|SpeedSolution.csproj|solutionrelative:views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Project\\SpeedSolution\\Views\\Engineers\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Engineers\\Index.cshtml",
+              "ToolTip": "C:\\Project\\SpeedSolution\\Views\\Engineers\\Index.cshtml",
+              "RelativeToolTip": "Views\\Engineers\\Index.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAHAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-16T10:40:17.104Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "EngineersController.cs",
+              "DocumentMoniker": "C:\\Project\\SpeedSolution\\Controller.cs\\EngineersController.cs",
+              "RelativeDocumentMoniker": "Controller.cs\\EngineersController.cs",
+              "ToolTip": "C:\\Project\\SpeedSolution\\Controller.cs\\EngineersController.cs",
+              "RelativeToolTip": "Controller.cs\\EngineersController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAuAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-16T10:37:35.807Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Project\\SpeedSolution\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Project\\SpeedSolution\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "Views\\Home\\Index.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAgAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-16T10:23:25.993Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

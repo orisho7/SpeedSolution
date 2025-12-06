@@ -1,0 +1,48 @@
+﻿@model RegisterViewModel
+<form asp-action="Register" method="post">
+    <label>Mobile Number:</label>
+    <input asp-for="MobileNumber" />
+    <button type="button" onclick="sendVerificationCode()">Send Code</button>
+    <input placeholder="Enter Code" id="verificationCode" />
+
+    <label>Email:</label>
+    <input asp-for="Email" />
+
+    <label>First Name (Arabic):</label>
+    <input asp-for="FirstNameArabic" />
+
+    <label>Last Name (Arabic):</label>
+    <input asp-for="LastNameArabic" />
+
+    <label>Date of Birth:</label>
+    <input asp-for="DateOfBirth" type="date" />
+
+    <label>Gender:</label>
+    <select asp-for="Gender">
+        <option>Male</option>
+        <option>Female</option>
+    </select>
+
+    <label>City:</label>
+    <input asp-for="City" />
+
+    <label>Password (1 uppercase, rest digits):</label>
+    <input asp-for="Password" type="password" />
+
+    <label>How did you hear about us?</label>
+    <select asp-for="HowDidYouHear">
+        <option>Friends</option>
+        <option>Social Media</option>
+        <option>Educational Institution</option>
+        <option>Community</option>
+        <option>Work</option>
+    </select>
+
+    <button type="submit">Register</button>
+</form>
+<script>
+    function sendVerificationCode() {
+        // Simulate sending code (replace with real API later)
+        alert("Verification code sent: 123456");
+    }
+</script>
